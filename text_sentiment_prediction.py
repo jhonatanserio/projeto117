@@ -51,7 +51,7 @@ def predict(text):
         sentence=[]
         sentence.append(text)
 
-        sequences=tokenizer.text_to_seguences(sentence)
+        sequences=tokenizer.texts_to_sequences(sentence)
 
         padded=pad_sequences(
             sequences,maxLen=max_length,padding=padding_type,truncating=trunc_type
@@ -60,10 +60,8 @@ def predict(text):
 
         predicted_class_label=np.argmax(model.predict(testing_padded),axios=1)
         print(predicted_class_label)
-        for_key,value in emo_code_url.items():
-            if value[0]==predict_class_label:
+        for key,value in emo_code_url.items():
+            if value[0]==predicted_class_label:
                 predicted_emotion_img_url=value[1]
                 predicted_emotion=key
         return predicted_emotion,predicted_emotion_img_url
-
-        
